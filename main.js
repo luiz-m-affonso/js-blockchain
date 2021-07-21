@@ -55,3 +55,10 @@ class Blockchain {
     return true
   }
 }
+
+let jsChain = newBlockchain()
+jsChain.addBlcok(new Block("01/25/2021", {amount: 5}))
+jsChain.addBlock(new Block("02/24/2020", {amount: 10}))
+
+console.log(JSON.stringify(jsChain, null, 4))
+console.log('Is blockchain valid? ' + jsChain.checkValid())
