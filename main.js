@@ -15,6 +15,26 @@ class Block {
   }
 
   mineBlock(difficulty) {
-    
+
+  }
+}
+
+class Blockchain {
+  constructor() {
+    this.chain = [this.createGenesis()]
+  }
+
+  createGenesis() {
+    return new Block(0, '01/02/2017', 'Genesis Block', '0')
+  }
+
+  latestBlock() {
+    return this.chain[this.chain.length - 1]
+  }
+
+  addBlock(newBlock) {
+    newBlock.previousHash = this.latestBlock().hash
+    newBlock.hash = newBlock.calculateHash()
+    this.chain.push(newBlock);
   }
 }
