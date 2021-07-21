@@ -5,6 +5,20 @@ class Block {
     this.parentHash = parentHash
     this.hash = sha256(this.nonce + this.parentHash).toString()
   }
+
+  isvalid() {
+    return this.parentHash === 'root' ||
+    (this.hash.substr(-DIFFICULTY) === '0'.repeat(DIFFICULTY) && this.hash === sha256(this.nonce + this.parentHash).toString())
+  }
+
+  setNonce(nonce) {
+    this.nonce = nonce
+    this._setHash()
+  }
+
+  _setHash() {
+    this.hash = sha256(this.nonce + this.parentHash).toString()
+  }
 }
 
 class Blockchain {
