@@ -7,4 +7,12 @@ class Block {
     this.hash = this.calculateHash()
     this.nonce = 0
   }
+
+  calculateHash() {
+
+  }
+
+  mineBlock(difficulty) {
+   
+  }
 }
