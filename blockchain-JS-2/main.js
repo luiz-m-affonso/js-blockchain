@@ -8,7 +8,11 @@ class Block {
 
   isValid() {
     return this.parentHash === 'root' ||
-    (this.hash.substr(-DIFFICULTY) === '0'.repeat(DIFFICULTY) && this.hash === sha256(this.nonce + this.parentHash).toString())
+    (this.hash.substr(-DIFFICULTY) === '0'.repeat(DIFFICULTY) && this.hash === this._calculateHash())
+  }
+
+  _calculateHash() {
+    return sha256(this.nonce + this.parentHash + this.coinBaseBeneficiary).toString()
   }
 
   setNonce(nonce) {
