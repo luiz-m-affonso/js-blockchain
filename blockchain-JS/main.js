@@ -56,7 +56,7 @@ class Blockchain {
   }
 }
 
-let jsChain = newBlockchain()
+let jsChain = new Blockchain()
 jsChain.addBlcok(new Block("01/25/2021", {amount: 5}))
 jsChain.addBlock(new Block("02/24/2020", {amount: 10}))
 
