@@ -36,7 +36,8 @@ class Block {
 
 
 class Blockchain {
-  _addBlock(block) {
+  constructor() {
+    _addBlock(block) {
     if (!block.isValid())
       return
     if (this.constainsBlock())
@@ -50,8 +51,24 @@ class Blockchain {
     newUtxoPool.addUTXO(block.coinBaseBeneficiary, 12.5)
     block.utxoPool = newUtxoPool;
 
+    const transactions = block.transactions
+    block.transactions = {}
+    let containsInvalidTransactions = false
+
+    Object.values(transactions).forEach(transaction => {
+      if (block.isValidTransaction(transaction.inputPublicKey, transaction.amount)) {
+        block.addTransaction(transaction.inputPublicKey, transaction.amount, transaction.outputPublicKey)
+      } else {
+        containsInvalidTransactions = true
+      }
+    })
+
+    if (constainsInvalidTransactions)
+      return
+
     this.blocks[block.hash] = block
     rerender()
+    }
   }
 
   longestChain() {
